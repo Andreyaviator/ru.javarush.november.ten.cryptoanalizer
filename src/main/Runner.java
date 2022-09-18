@@ -72,7 +72,7 @@ public class Runner {
                     }
 
                 }
-
+git status
             }  // else
 
             System.out.println("Если Вы хотите продолжить, выберите предложенные варианты");
