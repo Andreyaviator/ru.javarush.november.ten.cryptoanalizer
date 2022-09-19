@@ -21,22 +21,22 @@ public class Decoder {
         int c = 0;
         int b = 0;
         ArrayList<Character> newArray = new ArrayList<>();
-        ArrayList<Character> array10 = new ArrayList<>();
 
-        for (int i = 0; i < array.length; i++) {
-            array10.add(array[i]);
-        }
-
-
-        for (int i = 0; i < array.length; i++) {
+          for (int i = 0; i < array.length; i++) {
             if (Alphavit.alphavitAsList.contains(array[i])) {
             b =Alphavit.alphavitAsList.indexOf(array[i]);
-            c = b - answer;
+            b = b - answer;
 
-                if (c < 0) {
-                    newArray.add(Alphavit.alphavitAsList.get( (Alphavit.alphavitAsList.size() - Math.abs(c))));
+                if (b < 0) {
+                    newArray.add(Alphavit.alphavitAsList.get( (Alphavit.alphavitAsList.size() - Math.abs(b))));
                 } else
-                  newArray.add(Alphavit.alphavitAsList.get(c));
+                   if(b > (Alphavit.alphavitAsList.size()-1)){
+                   newArray.add(Alphavit.alphavitAsList.get(b - Alphavit.alphavitAsList.size()));
+                   } else
+                       if (b==Alphavit.alphavitAsList.size()){
+                           newArray.add(Alphavit.alphavitAsList.get(b - Alphavit.alphavitAsList.size()));
+                       } else
+                        newArray.add(Alphavit.alphavitAsList.get(b));
             } else
                 continue;
         }
