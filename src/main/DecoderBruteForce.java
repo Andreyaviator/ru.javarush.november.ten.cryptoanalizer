@@ -35,17 +35,15 @@ public class DecoderBruteForce {
                     if (b > (Alphavit.alphavitAsList.size() - 1)) {
                         b = b % (Alphavit.alphavitAsList.size());
                         array1[j] = (Alphavit.alphavitAsList.get(b));
-                    } else if (b < 0) {
-                        b = Alphavit.alphavitAsList.size() - Math.abs(b);
+                    } else
+                        if (b < 0) {
+                        b = Alphavit.alphavitAsList.size() - Math.abs(b)-1;
                         array1[j] = (Alphavit.alphavitAsList.get(b).charValue());
                     } else
                         array1[j] = (Alphavit.alphavitAsList.get(b).charValue());
                 }
             }
-            // for (int j = 0; j < array1.length; j++) {
-            //array13.add(array1[j]);
-            // }
-            for (int j = 0; j < array1.length; j++) {
+             for (int j = 0; j < array1.length; j++) {
                 if (array1[j] == ',') {
                     int res = j + 1;
                       if(res >= array1.length) {
