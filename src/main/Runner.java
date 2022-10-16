@@ -32,29 +32,20 @@ public class Runner {
                 switch (answer) {
                     case 1: {
                         // текст для зашифровки получаем из файла inputText.txt, результат записываем в файл outputText.txt
-
                         System.out.println("Вы выбрали режим - зашифровать текст. ");
-                        String path = "C:" + sep + "Users" + sep + "aviat" + sep + "Desktop" + sep + "ru.javarush.november.ten.cryptoanalizer" + sep + "inputText.txt";
+                        String path = "src" + sep + "main" + sep + "inputText.txt";
                         Path nameOfFile = Path.of(path);
-                        Coder coder = new Coder();
-                        System.out.println("Введите код шифрования в диапазоне от -41 до 41 ");
-
+                        CryptoGrafer coder = new CryptoGrafer();
+                        System.out.println("Введите код шифрования: ");
                         int answer1 = scanner.nextInt();
-
-
-                        if (answer1 < (-41) || answer1 > 41) {
-                            System.out.println("Неправильно введен код.");
-                            break;
-                        }
                         coder.codering(nameOfFile, answer1);
                     }
                     break;
                     case 2: {
                         System.out.println("Вы выбрали режим - расшифровать текст методом \"Brute Force\"");
-                        String path = "C:" + sep + "Users" + sep + "aviat" + sep + "Desktop" + sep + "ru.javarush.november.ten.cryptoanalizer" + sep + "outputText.txt";
+                        String path = "src" + sep + "main" + sep + "outputText.txt";
                         Path nameFromFile = Path.of(path);
                         DecoderBruteForce force = new DecoderBruteForce();
-
                         force.decBrForce(nameFromFile);
                     }
                     break;
@@ -62,29 +53,26 @@ public class Runner {
                         System.out.println("Вы выбрали режим - дешифровать текст");
                         System.out.println("Введите код дешифрования");
                         int answer2 = scanner.nextInt();
-
-                        String path = "C:" + sep + "Users" + sep + "aviat" + sep + "Desktop" + sep + "ru.javarush.november.ten.cryptoanalizer" + sep + "outputText.txt";
+                        String path = "src" + sep + "main" + sep + "outputText.txt";
                         Path nameFromFile = Path.of(path);
                         Decoder dec = new Decoder();
                         dec.decoder(nameFromFile, answer2);
-                    }  break;
+                    }
+                    break;
                     case 4: {
                         System.out.println("Вы выбрали режим - расшифровать текст методом \"Статического анализа\"");
-                        String path = "C:" + sep + "Users" + sep + "aviat" + sep + "Desktop" + sep + "ru.javarush.november.ten.cryptoanalizer" + sep + "outputText.txt";
+                        String path = "src" + sep + "main" + sep + "outputText.txt";
                         Path nameFromFile = Path.of(path);
                         DecStAnaliz analiz = new DecStAnaliz();
                         analiz.decStAn(nameFromFile);
-                            }
+                    }
                 }
-
             }  // else
             System.out.println("==========================================================");
             System.out.println("Если Вы хотите продолжить, выберите предложенные варианты");
             System.out.println("1 - продолжить далее");
             System.out.println("2 - остановить");
-
             int answer3 = scanner.nextInt();
-
             if (answer3 < 1 || answer3 > 2)
                 System.out.println("Введен неправильный вариант");
             else {

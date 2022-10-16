@@ -6,12 +6,12 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class DecStAnaliz {
-    public String textFromOutput1;
+    private String textFromOutput1;
 
-    public DecStAnaliz() throws IOException {
+    DecStAnaliz() {
     }
 
-    public void decStAn(Path path) throws IOException {
+    void decStAn(Path path) throws IOException {
         textFromOutput1 = Files.readString(path);
         String textFromOutput = textFromOutput1.toLowerCase();
         char[] array = textFromOutput.toCharArray();
@@ -35,40 +35,66 @@ public class DecStAnaliz {
             }
         }
         al = CustomComparator.sortByValues(al);
+//         for(Map.Entry<Character, Integer> pair: al.entrySet())
+//         {
+//             Character key = pair.getKey();
+//             Integer value = pair.getValue();
+//             System.out.println(key + " --> " + value);
+//         }
         ArrayList<Character> resultArray = new ArrayList<>();
 
-        Character firstKey = (Character) al.keySet().toArray()[1];
-
+        Character firstKey = (Character) al.keySet().toArray()[2];
         int number1 = Alphavit.alphavitAsList.indexOf(firstKey);
-        System.out.println(" буква \"о\" по статистике использования в русском языке( 10,983%)"); // имеет ндекс в alphavitAsList - 15/
         System.out.println("======================================================");
-        System.out.println("            Текст:");
+        System.out.println("           Расшифрованный текст:");
         int deltaKey = 0;
-        int delta = 15;
+        boolean cicleIndex;
+        int delta = 0;
+        int[] arAlphavit = {5, 41, 15, 1, 9, 13};  // массив индексов часто встречающихся букв
+        int i = 0;
+        do {
+            if(i > 5)
+                break;
+            delta = arAlphavit[i];                     // ввод индекса буквы
+            if ((number1 - delta) > 0) {
+                deltaKey = number1 - delta;
+            } else if ((number1 - delta) < 0) {
+                deltaKey = Alphavit.alphavitAsList.size() - Math.abs(number1 - delta);
+            } else if (deltaKey == 0) {
+                deltaKey = Alphavit.alphavitAsList.size() - 1;
+            }
 
-        if ((number1 - delta) > 0) {
-            deltaKey = number1 - delta;
-        } else if ((number1 - delta) < 0) {
-            deltaKey = Alphavit.alphavitAsList.size() - Math.abs(number1 - delta);
-        } else if (deltaKey == 0) {
-            deltaKey = Alphavit.alphavitAsList.size() - 1;
-        }
+            for (int a = 0; a < array10.size(); a++) {
+                if (Alphavit.alphavitAsList.contains(array10.get(a))) {
+                    int rrr = Alphavit.alphavitAsList.indexOf(array10.get(a));
+                    int sas = rrr - deltaKey;
+                    if (sas > (Alphavit.alphavitAsList.size() - 1)) {
+                        resultArray.add(Alphavit.alphavitAsList.get(sas - Alphavit.alphavitAsList.size()));
+                    } else if (sas < 0) {
+                        resultArray.add(Alphavit.alphavitAsList.get(Alphavit.alphavitAsList.size() - Math.abs(sas)));
+                    } else
+                        resultArray.add(Alphavit.alphavitAsList.get(sas));
+                }
+            }
 
-        for (int a = 0; a < array10.size(); a++) {
-            if (Alphavit.alphavitAsList.contains(array10.get(a))) {
-                int rrr = Alphavit.alphavitAsList.indexOf(array10.get(a));
-                int sas = rrr - deltaKey;
-                if (sas > (Alphavit.alphavitAsList.size() - 1)) {
-                    resultArray.add(Alphavit.alphavitAsList.get(sas - Alphavit.alphavitAsList.size()));
-                } else if (sas < 0) {
-                    resultArray.add(Alphavit.alphavitAsList.get(Alphavit.alphavitAsList.size() - Math.abs(sas)));
-                } else
-                    resultArray.add(Alphavit.alphavitAsList.get(sas));
+            for (int k = 0; k < resultArray.size(); k++) {
+                System.out.print(resultArray.get(k));
+            }
+            System.out.println();
+            System.out.println("Вас устраивает данный вариант расшифровки?");
+            System.out.println("Выберите 1 - устраивает; 2 - неустраивает");
+            Scanner sc11 = new Scanner(System.in);
+            int nn = sc11.nextInt();
+            if (nn == 2) {
+                i = i + 1;
+                cicleIndex = true;
+                resultArray.clear();
+            } else {
+//                sc11.close();
+                cicleIndex = false;
             }
         }
-        for (int i = 0; i < resultArray.size(); i++) {
-            System.out.print(resultArray.get(i));
-        }
+        while (cicleIndex == true);
     }
 }
 

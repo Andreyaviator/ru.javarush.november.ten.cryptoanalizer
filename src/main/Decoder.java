@@ -5,14 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-public class Decoder {
-    public String textFromOutput1;
+ class Decoder {
+     String textFromOutput1;
 
-
-    public Decoder() throws IOException {
-    }
-
-    public void decoder(Path path, int answer ) throws IOException {
+     void decoder(Path path, int answer ) throws IOException {
         textFromOutput1 = Files.readString(path);
         if(textFromOutput1.isEmpty()){
             System.out.println("Файл для считывания текста - пустой");
@@ -21,6 +17,10 @@ public class Decoder {
         int c = 0;
         int b = 0;
         ArrayList<Character> newArray = new ArrayList<>();
+
+         if(answer > Alphavit.alphavitAsList.size()){
+             answer=answer-Alphavit.alphavitAsList.size();
+         }
 
           for (int i = 0; i < array.length; i++) {
             if (Alphavit.alphavitAsList.contains(array[i])) {
